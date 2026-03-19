@@ -1,0 +1,4 @@
+.codeBlockContainer {
+  border-radius: var(--ifm-code-border-radius);
+  overflow: hidden;
+}

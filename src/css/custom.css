@@ -18,7 +18,7 @@
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
+[data-theme="dark"] {
   --ifm-color-primary: #25c2a0;
   --ifm-color-primary-dark: #21af90;
   --ifm-color-primary-darker: #1fa588;
@@ -27,4 +27,120 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Force Monokai Pro dark background on all code blocks (overrides Docusaurus inline --prism-* vars on <pre>) */
+pre[class*="codeBlock"] {
+  --prism-color: #fcfcfa !important;
+  --prism-background-color: #2d2a2e !important;
+  background-color: #2d2a2e !important;
+  color: #fcfcfa !important;
+}
+
+/* Doc page layout: content fills space, TOC pinned far right */
+@media (min-width: 997px) {
+  main[class*="docMainContainer"] > .container {
+    max-width: 100% !important;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  main[class*="docMainContainer"]
+    > .container
+    > .row
+    > .col[class*="docItemCol"] {
+    flex: 1 1 0%;
+    max-width: none !important;
+    min-width: 0;
+  }
+}
+
+/* Slack-style inline code: reddish font on grey background */
+:not(pre) > code {
+  color: #e01e5a;
+  background-color: #f0f0f0;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 0.1em 0.3em;
+  font-size: 90%;
+}
+
+[data-theme="dark"] :not(pre) > code {
+  color: #e06b91;
+  background-color: #3a3a3c;
+  border-color: #4a4a4c;
+}
+
+/* Word wrap off by default, togglable via .wrap */
+pre {
+  white-space: pre !important;
+  word-break: normal !important;
+  overflow-x: auto;
+}
+
+pre code {
+  white-space: pre !important;
+  word-break: normal !important;
+}
+
+pre.wrap {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-x: unset;
+}
+
+pre.wrap code,
+code.wrap {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+}
+
+/* Code block enhancement buttons */
+.code-block-enhanced {
+  position: relative;
+}
+
+.code-block-buttons {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 1;
+}
+
+.code-block-enhanced:hover .code-block-buttons {
+  opacity: 1;
+}
+
+.code-block-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+  padding: 0;
+}
+
+.code-block-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.code-block-btn.active {
+  color: var(--ifm-color-primary);
+}
+
+.code-block-btn.copied {
+  color: var(--ifm-color-primary);
 }
